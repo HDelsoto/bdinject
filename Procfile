@@ -1,1 +1,0 @@
-web: --spring.profiles.active=prod
