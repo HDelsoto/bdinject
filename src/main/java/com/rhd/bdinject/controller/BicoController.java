@@ -29,7 +29,9 @@ public class BicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Bico> buscar(@PathVariable Long id) {
+        System.out.println("Valor ID para testar --- "+ id);
         Bico bico = repository.getOne(id);
+        bico = repository.getById(id);
         if (bico == null) {
             return ResponseEntity.notFound().build();
         }
