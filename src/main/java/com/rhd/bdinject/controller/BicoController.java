@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bicos")
@@ -30,8 +31,7 @@ public class BicoController {
     @GetMapping("/{id}")
     public ResponseEntity<Bico> buscar(@PathVariable Long id) {
         System.out.println("Valor ID para testar --- "+ id);
-        Bico bico = repository.getOne(id);
-        bico = repository.getById(id);
+        Bico bico = repository.findById(id).get();
         if (bico == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,7 +41,7 @@ public class BicoController {
     @PutMapping("/{id}")
     public ResponseEntity<Bico> atualizar(@PathVariable Long id,
                                              @Valid @RequestBody Bico bico) {
-        Bico existente = repository.getOne(id);
+        Bico existente = repository.findById(id).get();
         if (existente == null) {
             return ResponseEntity.notFound().build();
         }
@@ -52,11 +52,12 @@ public class BicoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
-        Bico bico = repository.getOne(id);
-        if (bico == null) {
-            return ResponseEntity.notFound().build();
-        }
-        repository.delete(bico);
-        return ResponseEntity.noContent().build();
+            Bico bico = repository.findById(id).get();
+            if (bico == null) {
+                return ResponseEntity.notFound().build();
+            }
+            repository.delete(bico);
+            return ResponseEntity.noContent().build();
+
     }
 }
