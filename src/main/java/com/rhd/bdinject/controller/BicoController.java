@@ -6,6 +6,7 @@ import com.rhd.bdinject.repository.BicoRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,6 +40,7 @@ public class BicoController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<Bico> atualizar(@PathVariable Long id,
                                              @Valid @RequestBody Bico bico) {
         Bico existente = repository.findById(id).get();
@@ -51,6 +53,7 @@ public class BicoController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> remover(@PathVariable Long id) {
             Bico bico = repository.findById(id).get();
             if (bico == null) {
