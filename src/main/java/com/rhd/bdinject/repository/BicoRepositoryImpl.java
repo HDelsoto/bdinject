@@ -34,7 +34,7 @@ public class BicoRepositoryImpl  {
 
     public String findNomeById(Long id){
         StringBuilder sql = new StringBuilder();
-        sql.append(" FROM Bico b");
+        sql.append(" SELECT b.codigo FROM Bico b");
         sql.append(" WHERE b.id = :id ");
         TypedQuery<String> query = entityManager.createQuery(sql.toString(), String.class);
         query.setParameter("id",id);
