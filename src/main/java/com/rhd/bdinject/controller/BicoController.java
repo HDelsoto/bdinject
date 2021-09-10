@@ -39,7 +39,7 @@ public class BicoController {
         return ResponseEntity.ok(bico);
     }
 
-    @GetMapping("/findNomeById/{id}")
+    @GetMapping("/findnomebyid/{id}")
     public ResponseEntity<String> findNomeById(@PathVariable Long id) {
         String bico = repository.findNomeById(id);
         return ResponseEntity.ok(bico);
